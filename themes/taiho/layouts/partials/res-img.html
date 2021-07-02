@@ -1,0 +1,14 @@
+{{ $headless := .Site.GetPage "/uploads" }}
+{{ $src := .src }}
+{{ $img := $headless.Resources.GetMatch $src }}
+{{ $srcSet := slice }}
+{{ $widths := $.Site.Params.imageWidths }}
+
+{{ range $widths }}
+  {{ $srcUrl := (printf "%dx" . | $img.Resize).RelPermalink }}
+  {{ if eq $src "" }}{{ $src = $srcUrl }}{{ end }}
+  {{ $srcSet = $srcSet | append (printf "%s %dw" $srcUrl .) }}
+{{ end }}
+{{ $srcSet = (delimit $srcSet ",") }}
+
+<img {{ $widths }} srcset="{{ $srcSet }}" src="{{ $src }}">

@@ -1,0 +1,60 @@
+baseURL = "http://example.org/"
+languageCode = "en-us"
+title = "Taiho"
+theme = "taiho"
+copyright = "Copyright © 2021 Powered by ❤ by "
+
+
+[menu]
+# [[menu.main]]
+# URL = "/"
+# name = "Home"
+# weight = 1
+
+[[menu.main]]
+URL = "/experiments/"
+name = "Experiments"
+weight = 2
+
+[[menu.main]]
+URL = "/imagination/"
+name = "Imagination"
+weight = 3
+
+[[menu.main]]
+URL = "/atmospheres/"
+name = "Atmospheres"
+weight = 4
+
+[[menu.main]]
+URL = "/thoughts/"
+name = "Thoughts"
+weight = 5
+
+
+[[menu.main]]
+URL = "/about/"
+name = "About"
+weight = 6
+
+
+
+# default parameters
+[params]
+home = "Home"
+logo = "img/logo-emptyarea.svg"
+logo_light = "img/logo-light.svg"
+
+email = "taoguangc@gmail.com"
+address = "125/A, CA Commercial Area, California, USA"
+author = "Jeffrey Qian"
+description = "This is meta description"
+google_analytics_id = "" # Your ID
+
+
+imageWidths = [1500, 900, 600]
+
+[module]
+[[module.mounts]]
+source = "static/images"
+target = "assets/images"

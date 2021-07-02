@@ -1,0 +1,21 @@
+{{ $src := $.Get "src" }}
+{{ $alt := $.Get "alt" }}
+
+{{ $img := resources.Get $src }}
+
+{{- $lqip := $img.Resize "30x Gaussian" }}
+{{- $small := $img.Resize "600x" }}
+{{- $medium := $img.Resize "900x" }}
+{{- $large := $img.Resize "1200x" }}
+{{- $smallp := $img.Resize "600x webp" }}
+{{- $mediump := $img.Resize "900x webp" }}
+{{- $largep := $img.Resize "1200x webp" }}
+
+{{/* $img := imageConfig ($src.RelPermalink | printf "content/%s" ) */}}
+
+
+<picture class="block max-w-max bg-cover mb-12" style="background-image: url(data:image/jpeg;base64,{{ $lqip.Content | base64Encode  }});">
+  <source type="image/webp" srcset="{{ if ge $img.Width "600" }}{{ with $smallp.RelPermalink }}{{.}} 600w{{ end }}{{ end }}{{ if ge $img.Width "900" }}{{ with $mediump.RelPermalink }}, {{.}} 900w{{ end }}{{ end }}{{ if ge $img.Width "1500" }}{{ with $largep.RelPermalink }}, {{.}} 1500w {{ end }}{{ end }}" sizes="auto">
+  <img {{ if .Get (print $medium) }}src="{{ $medium.RelPermalink }}"{{ else }}src="{{ $img.RelPermalink }}"{{ end }} width="{{ $img.Width }}" height="{{ $img.Height }}"{{ with .Get "alt" }} alt='{{.}}'{{ end }} loading="lazy" decoding="async"
+  />
+</picture>

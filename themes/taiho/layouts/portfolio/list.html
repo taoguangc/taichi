@@ -1,0 +1,28 @@
+{{ define "main" }}
+
+<section class="mt-32 lg:mt-64 fixed top-0 left-0 right-0" id="hero">
+  <div class="mx-auto container px-4 lg:px-56 text-center">
+    <h1 class="font-benne">"{{ .Description }}"</h1>
+  </div>
+</section>
+
+<section class="w-full mt-80 lg:mt-160 flex flex-col items-center" id="mywork">
+  <div class="container max-w-7xl flex flex-wrap">
+    {{ range .Pages.ByDate }}
+    <div class="lg:p-12 sm:w-1/2 text-center">
+      <a class="text-base block duration-700 transform-gpu hover:opacity-60" href="{{ .Permalink }}">
+        {{ with .Params.thumb }}
+        {{ $img := resources.Get . }}
+        {{ $r := $img.Resize "640x webp q85" }}
+        <img src="{{ $r.RelPermalink }}" width="{{ $r.Width }}" height="{{ $r.Height }}" alt="work-thumb" loading="lazy" decoding="async" />
+        {{end}}
+        <p class="mt-4 mb-10 lg:mt-12 text-sm font-normal">
+          {{ .Title }}
+        </p>
+      </a>
+    </div>
+    {{ end }}
+  </div>
+</section>
+
+{{ end }}

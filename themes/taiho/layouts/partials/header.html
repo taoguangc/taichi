@@ -1,0 +1,57 @@
+<header class="w-full bg-white fixed z-20 top-0 left-0 right-0">
+  <nav class="px-8 py-4 container mx-auto flex justify-between items-center flex-wrap" x-data="{ isOpen: false }">
+    <div class="hidden sm:block lg:flex lg:items-center lg:w-auto text-center">
+      <ul class="flex space-x-8">
+        {{ $current := . }}
+        {{ range site.Menus.main }}
+        {{ $active := or ($current.IsMenuCurrent "main" .) ($current.HasMenuCurrent "main" .) }}
+        {{ $active = or $active (eq .Name $current.Title) }}     
+        {{ $active = or $active (and (eq (trim (path.Dir .URL) "/") $current.Section) (ne $current.Section "")) }}
+        <li>
+          <a class="block transition-colors duration-500 transform hover:text-black{{ if $active }} text-black{{ end }}" href="{{ .URL | absURL }}">
+            {{ .Name }}
+          </a>
+        </li>
+        {{ end }}
+      </ul>
+    </div>
+
+    <div class="sm:hidden">
+    </div>
+    <!--Mobile menu-->
+    <div class="sm:hidden z-20 absolute inset-0 w-full h-screen bg-white flex items-center" x-show="isOpen" x-transition:enter="transition ease-out duration-500" x-transition:enter-start="transform translate-x-full" x-transition:leave="transition ease-in duration-500" x-transition:leave-end="transform -translate-x-full">
+      <ul class="mx-auto flex flex-col items-center">
+        {{ $current := . }}
+        {{ range $i, $e := site.Menus.main }}
+        {{ $active := or ($current.IsMenuCurrent "main" .) ($current.HasMenuCurrent "main" .) }}
+        {{ $active = or $active (eq .Name $current.Title) }}     
+        {{ $active = or $active (and (eq (trim (path.Dir .URL) "/") $current.Section) (ne $current.Section "")) }}
+        <li class="relative my-4 text-xl" data-sal="slide-up" data-sal-duration="1000" data-sal-delay="{{ mul $i 200 }}">
+          <a class="block font-light{{ if $active }} text-black{{ end }}" href="{{ .URL | absURL }}">
+            {{ .Name }}
+            {{ if $active }}<div class="absolute border-b border-white transition-all duration-500 transform group-hover:w-full w-full" aria-hidden="true"></div>{{ end }}
+          </a>
+        </li>
+        {{ end }}
+      </ul>
+    </div>
+    
+    <div class="flex items-center">
+      <a href="{{ site.BaseURL }}" aria-label="{{ site.Title }}" class="text-base text-black">
+        Taiho
+      </a>
+    </div>
+
+    <!--Toggle button (hidden on large screens)-->
+    <button type="button" class="menu-mobile" @click="isOpen = !isOpen" aria-controls="mobile-menu" aria-expanded="false">
+      <span class="sr-only">Open main menu</span>
+      <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#000" aria-hidden="true" x-show="!isOpen">
+        <path d="M0 6.5H24V5.5H0V6.5ZM0 18.5H24V17.5H0V18.5ZM0 12.5H12V11.5H0V12.5ZM12 12.5H24V11.5H12V12.5Z" />
+      </svg>
+      <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#000" aria-hidden="true" x-show="isOpen">
+        <path d="M2 2L22 22M2 22L22 2L2 22Z" />
+      </svg>
+    </button>
+
+  </nav>
+</header>

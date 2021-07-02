@@ -1,0 +1,7 @@
+{{ if .Params.images }}
+{{ $image := index .Params.images 0 }}
+{{ $src := resources.Get $image }}
+{{ $small := $src.Resize "360x q85 Box" }}
+
+<img class="post-image" alt="{{ .Title }}" src="{{ $small.RelPermalink }}" >
+{{ end }}

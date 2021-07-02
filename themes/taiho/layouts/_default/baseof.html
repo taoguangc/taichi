@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode | default "en" }}">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edg,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+{{- if .IsHome }}
+<title>{{ .Site.Title }}</title>
+<meta property="og:title" content="{{ .Site.Title }}" />
+{{- else }}
+<title>{{ .Title }} | {{ .Site.Title }}</title>
+<meta property="og:title" content="{{ .Title }} | {{ .Site.Title }}" />
+{{- end }}
+
+{{- if .IsHome }}
+<meta name="description" content="{{ .Site.Params.Description }}">
+<meta property="og:description" content="{{ .Site.Params.Description }}" />
+{{- else }}
+<meta name="description" content="{{ .Params.Description }}">
+<meta property="og:description" content="{{ .Params.Description }}" />
+{{- end -}}
+
+<!-- Favicon -->
+<link rel="icon" type="image/png" href="/images/icons/favicon-32x32.png" sizes="32x32" />
+<link rel="icon" type="image/svg+xml" href="/images/icons/favicon.svg" sizes="16x16" />
+<link rel="apple-touch-icon" href="/images/icons/apple-touch-icon.png" sizes="180x180" />
+
+<!-- Google fonts -->
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Benne:wght@400&family=Roboto:wght@300;400&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Benne:wght@400&family=Roboto:wght@300;400&display=swap" media="print" onload="this.media='all'" />
+
+
+{{- $css := resources.Get "styles/styles.css" | resources.PostCSS }}
+{{- if .Site.IsServer }}
+  <link rel="stylesheet" href="{{ $css.RelPermalink }}">
+{{- else }}
+  {{- $styles := $css | minify | resources.PostProcess }}
+
+<!-- Inline css -->
+<style>{{ $styles.Content | safeCSS }}</style>
+
+{{- $styles = printf "%s?v=%d" $styles.RelPermalink now.Unix }}
+{{/* <link rel="preload" as="style" href="{{ $styles }}"> */}}
+{{/* <link rel="stylesheet" href="{{ $styles }}"> */}}
+{{ partial "google_analytics_async.html" . }}
+{{- end }}
+</head>
+<body x-data="{ toTop: false }" @scroll.window="toTop = ( window.pageYOffset > window.innerHeight) ? true : false">
+{{ partial "header.html" . -}}
+{{ block "main" . }}{{- end -}}
+{{ partial "footer.html" . -}}
+</body>
+</html>
