@@ -1,7 +1,7 @@
 baseURL = "https://taiho.netlify.app/"
 languageCode = "en-us"
-title = "Taiho"
-theme = "taiho"
+title = "Taichi"
+theme = "taichi"
 copyright = "Copyright © 2021 Powered by ❤ by "
 
 
