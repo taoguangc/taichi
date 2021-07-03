@@ -4,9 +4,60 @@ backend:
 media_folder: 'static/images'
 public_folder: '/images'
 collections:
-  - name: 'portfolio'
-    label: 'Portfolio'
-    folder: 'content/portfolio'
+  - name: 'experiments'
+    label: 'Experiments'
+    folder: 'content/portfolio/experiments'
+    create: true
+    slug: '{{slug}}'
+    fields:
+      - { label: 'Title', name: 'title', widget: 'string' }
+      - { label: 'Publish Date', name: 'date', widget: 'datetime' }
+      - { label: 'Description', name: 'description', widget: 'string' }
+      - { label: 'Thumb', name: 'thumb', widget: 'image' }
+      - name: 'images'
+        label: 'Images'
+        widget: 'list'
+        required: false
+        fields: 
+          - { label: 'Image', name: 'image', widget: 'image' }
+      - { label: 'Body', name: 'body', widget: 'markdown' }
+  - name: 'imagination'
+    label: 'Imagination'
+    folder: 'content/portfolio/imagination'
+    create: true
+    slug: '{{slug}}'
+    fields:
+      - { label: 'Title', name: 'title', widget: 'string' }
+      - { label: 'Publish Date', name: 'date', widget: 'datetime' }
+      - { label: 'Description', name: 'description', widget: 'string' }
+      - { label: 'Thumb', name: 'thumb', widget: 'image' }
+      - name: 'images'
+        label: 'Images'
+        widget: 'list'
+        required: false
+        fields: 
+          - { label: 'Image', name: 'image', widget: 'image' }
+      - { label: 'Body', name: 'body', widget: 'markdown' }
+  - name: 'atmospheres'
+    label: 'Atmospheres'
+    folder: 'content/portfolio/atmospheres'
+    create: true
+    slug: '{{slug}}'
+    fields:
+      - { label: 'Title', name: 'title', widget: 'string' }
+      - { label: 'Publish Date', name: 'date', widget: 'datetime' }
+      - { label: 'Description', name: 'description', widget: 'string' }
+      - { label: 'Thumb', name: 'thumb', widget: 'image' }
+      - name: 'images'
+        label: 'Images'
+        widget: 'list'
+        required: false
+        fields: 
+          - { label: 'Image', name: 'image', widget: 'image' }
+      - { label: 'Body', name: 'body', widget: 'markdown' }
+  - name: 'thoughts'
+    label: 'Thoughts'
+    folder: 'content/portfolio/thoughts'
     create: true
     slug: '{{slug}}'
     fields:
