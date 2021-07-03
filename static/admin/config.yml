@@ -1,0 +1,41 @@
+backend:
+  name: git-gateway
+  branch: main # Branch to update (optional; defaults to master)
+media_folder: 'static/images'
+public_folder: 'images'
+collections:
+  - name: 'portfolio'
+    label: 'Portfolio'
+    folder: 'content/portfolio'
+    create: true
+    slug: '{{slug}}'
+    fields:
+      - { label: 'Title', name: 'title', widget: 'string' }
+      - { label: 'Publish Date', name: 'date', widget: 'datetime' }
+      - { label: 'Description', name: 'description', widget: 'string' }
+      - { label: 'Thumb', name: 'thumb', widget: 'image' }
+      - name: 'images'
+        label: 'Images'
+        widget: 'list'
+        required: false
+        fields: 
+          - { label: 'Image', name: 'image', widget: 'image' }
+      - { label: 'Body', name: 'body', widget: 'markdown' }
+  - name: 'pages'
+    label: 'Pages'
+    files:
+      - file: 'content/_index.md'
+        label: 'Home Page'
+        name: 'home'
+        fields:
+          - { label: 'Title', name: 'title', widget: 'string' }
+          - { label: 'Description', name: 'description', widget: 'string' }
+          - { label: 'Body', name: 'body', widget: 'markdown' }
+      - file: 'content/portfolio/_index.md'
+        label: 'Portfolio Page'
+        name: 'portfolio'
+        fields:
+          - { label: 'Title', name: 'title', widget: 'string' }
+          - { label: 'Publish Date', name: 'date', widget: 'datetime' }
+          - { label: 'Description', name: 'description', widget: 'string' }
+          - { label: 'Body', name: 'body', widget: 'markdown' }
