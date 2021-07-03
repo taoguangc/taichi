@@ -1,4 +1,4 @@
-baseURL = "https://taiho.netlify.app/"
+baseURL = "https://tai-chi.netlify.app/"
 languageCode = "en-us"
 title = "Taichi"
 theme = "taichi"
