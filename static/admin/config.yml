@@ -64,7 +64,12 @@ collections:
       - { label: 'Title', name: 'title', widget: 'string' }
       - { label: 'Publish Date', name: 'date', widget: 'datetime' }
       - { label: 'Description', name: 'description', widget: 'string' }
-      - { label: 'Thumb', name: 'thumb', widget: 'image' }
+      - label: 'Thumb'
+        name: 'thumb'
+        widget: 'image'
+        media_library:
+          config:
+            multiple: true
       - name: 'images'
         label: 'Images'
         widget: 'list'

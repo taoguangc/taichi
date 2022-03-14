@@ -10,13 +10,13 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "alpinejs": "^3.2.1",
+    "alpinejs": "^3.9.1",
     "lax.js": "^2.0.3"
   },
   "devDependencies": {
-    "autoprefixer": "^10.2.6",
-    "postcss": "^8.3.5",
-    "postcss-cli": "^8.3.1",
-    "tailwindcss": "^2.2.4"
+    "autoprefixer": "^10.4.2",
+    "postcss": "^8.4.8",
+    "postcss-cli": "^9.1.0",
+    "tailwindcss": "^2.2.19"
   }
 }
